@@ -1,9 +1,5 @@
 import { Phonebook } from './Phonebook/Phonebook';
 
 export const App = () => {
-  return (
-    <>
-      <Phonebook></Phonebook>
-    </>
-  );
+  return <Phonebook></Phonebook>;
 };

@@ -24,4 +24,5 @@ export const ContactList = ({ handleDelete, contacts, filter }) => {
 ContactList.propTypes = {
   handleDelete: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filter: PropTypes.string.isRequired,
 };
