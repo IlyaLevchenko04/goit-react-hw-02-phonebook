@@ -35,26 +35,24 @@ export class Phonebook extends Component {
     });
   };
 
-  handleDelete = evt => {
-    const target = evt.currentTarget;
-    const id = target.closest('li').id;
-    const index = this.state.contacts.findIndex(contact => {
-      return contact.id === id;
-    });
+  handleDelete = id => {
     this.setState(({ contacts }) => {
-      const arr = [...contacts];
-      arr.splice(index, 1);
       return {
-        contacts: arr,
+        contacts: contacts.filter(contact => contact.id !== id),
       };
     });
   };
 
-  formSubmitHandler = data => {
-    console.log(data);
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
   };
 
   render() {
+    const { contacts } = this.state;
+    const filteredContacts = this.getFilteredContacts();
     return (
       <>
         <div>
@@ -65,10 +63,9 @@ export class Phonebook extends Component {
         <div>
           <h2>Contacts</h2>
           <Filter onChange={this.handleFilter} />
-          {this.state.contacts.length > 0 && (
+          {contacts.length > 0 && (
             <ContactList
-              contacts={this.state.contacts}
-              filter={this.state.filter}
+              contacts={filteredContacts}
               handleDelete={this.handleDelete}
             />
           )}
